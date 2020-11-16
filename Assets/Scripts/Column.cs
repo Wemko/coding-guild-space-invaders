@@ -22,15 +22,12 @@ public class Column : MonoBehaviour
 
     private void AlienDies(Alien alien)
     {
-        if(lowestAlien == alien)
-        {
-            UpdateLowestAlien();
-        }
         aliens.Remove(alien);
+        UpdateLowestAlien();
 
-        if(aliens.Count == 0)
+        if (aliens.Count == 0)
         {
-            columnEmpty.Invoke(this);
+            columnEmpty?.Invoke(this);
             Destroy(gameObject);
         }
     }

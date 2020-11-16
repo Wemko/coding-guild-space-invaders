@@ -83,6 +83,7 @@ public class Alien : MonoBehaviour
     {
         if(collision.gameObject.tag == "Bullet")
         {
+            Destroy(collision.gameObject);
             Dies();
         }
     }
