@@ -37,7 +37,10 @@ public class AliensController : MonoBehaviour
         {
             yield return new WaitForSeconds(shootDelay + UnityEngine.Random.Range(0, shootDelayRandomOffset));
             int index = UnityEngine.Random.Range(0, columns.Count);
-            columns[index].lowestAlien.Shoot();
+            if (columns[index].lowestAlien)
+            {
+                columns[index].lowestAlien.Shoot();
+            }
         }
     }
 
