@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Column : MonoBehaviour
 {
+    public Action<Column> columnEmpty;
     public Alien lowestAlien;
     public List<Alien> aliens;
 
@@ -26,6 +27,12 @@ public class Column : MonoBehaviour
             UpdateLowestAlien();
         }
         aliens.Remove(alien);
+
+        if(aliens.Count == 0)
+        {
+            columnEmpty.Invoke(this);
+            Destroy(gameObject);
+        }
     }
 
     private void UpdateLowestAlien()

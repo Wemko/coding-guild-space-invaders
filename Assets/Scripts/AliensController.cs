@@ -16,12 +16,17 @@ public class AliensController : MonoBehaviour
 
     private float nextMoveTimeStamp;
     private int direction = 1;
-    private Column[] columns;
+    private List<Column> columns;
 
     // Start is called before the first frame update
     void Start()
     {
-        columns = GetComponentsInChildren<Column>();
+        columns = new List<Column>(GetComponentsInChildren<Column>());
+        foreach(Column column in columns)
+        {
+            column.columnEmpty += RemoveColumn;
+        }
+
         StartCoroutine(IntervalMoveCommand());
         StartCoroutine(IntervalShootCommand());
     }
@@ -31,10 +36,9 @@ public class AliensController : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(shootDelay + UnityEngine.Random.Range(0, shootDelayRandomOffset));
-            int index = UnityEngine.Random.Range(0, columns.Length);
+            int index = UnityEngine.Random.Range(0, columns.Count);
             columns[index].lowestAlien.Shoot();
         }
-
     }
 
 
@@ -47,6 +51,11 @@ public class AliensController : MonoBehaviour
             move?.Invoke(new Vector2(moveSpeed * direction, 0));
         }
 
+    }
+
+    public void RemoveColumn(Column column)
+    {
+        columns.Remove(column);
     }
 
     public void TriggerChangeDirection(int newDirection)

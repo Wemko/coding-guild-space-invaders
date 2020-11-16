@@ -10,5 +10,10 @@ public class AlienBullet : MonoBehaviour
     void Update()
     {
         transform.Translate(new Vector2(0, -speed * Time.deltaTime));
+
+        if(transform.position.y > 100)
+        {
+            Destroy(gameObject);
+        }
     }
 }

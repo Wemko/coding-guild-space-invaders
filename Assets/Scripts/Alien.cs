@@ -76,7 +76,7 @@ public class Alien : MonoBehaviour
         instantiated.transform.position = transform.position;
         scoreController.AddScore(score);
         dies.Invoke(this);
-        Destroy(this);
+        Destroy(gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -85,5 +85,11 @@ public class Alien : MonoBehaviour
         {
             Dies();
         }
+    }
+
+    private void OnDestroy()
+    {
+        aliensController.move -= Move;
+        aliensController.changeDirection -= ChangeDirection;
     }
 }

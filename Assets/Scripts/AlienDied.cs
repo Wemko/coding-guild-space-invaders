@@ -10,7 +10,7 @@ public class AlienDied : MonoBehaviour
 
     private void Awake()
     {
-        timeStamp = Time.time + timeStamp;
+        timeStamp = Time.time + duration;
     }
 
     // Update is called once per frame
@@ -18,7 +18,7 @@ public class AlienDied : MonoBehaviour
     {
         if(Time.time > timeStamp)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
 
     }
