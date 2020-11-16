@@ -22,15 +22,12 @@ public class Column : MonoBehaviour
 
     private void AlienDies(Alien alien)
     {
-        if(lowestAlien == alien)
-        {
-            UpdateLowestAlien();
-        }
         aliens.Remove(alien);
+        UpdateLowestAlien();
 
-        if(aliens.Count == 0)
+        if (aliens.Count == 0)
         {
-            columnEmpty.Invoke(this);
+            columnEmpty?.Invoke(this);
             Destroy(gameObject);
         }
     }
@@ -39,9 +36,9 @@ public class Column : MonoBehaviour
     {
         Alien lowest = null;
 
-        foreach(Alien alien in aliens)
+        foreach (Alien alien in aliens)
         {
-            if(lowest == null)
+            if (lowest == null)
             {
                 lowest = alien;
             }
@@ -56,6 +53,6 @@ public class Column : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
